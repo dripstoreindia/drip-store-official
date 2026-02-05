@@ -3,76 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRIP STORE | Global Streetwear</title>
+    <title>Powerlook Style | Drip Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #080808; color: #fff; font-family: 'Inter', sans-serif; }
-        .product-card { background: #111; border: 1px solid #222; transition: 0.3s; }
-        .product-card:hover { border-color: #4facfe; transform: translateY(-5px); }
-        .badge { background: linear-gradient(90deg, #00f2fe, #4facfe); }
+        body { font-family: 'Montserrat', sans-serif; background-color: #f8f8f8; color: #1a1a1a; }
+        .sticky-nav { background: rgba(255, 255, 255, 0.9); backdrop-blur: 10px; }
+        .product-shadow { box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
+        .power-btn { background: #1a1a1a; color: #fff; transition: 0.3s; }
+        .power-btn:hover { background: #333; }
+        /* Powerlook style bottom nav */
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; background: #fff; border-top: 1px solid #eee; display: flex; justify-content: space-around; padding: 10px 0; z-index: 100; }
     </style>
 </head>
-<body>
-    <nav class="p-5 border-b border-gray-900 sticky top-0 bg-black/80 backdrop-blur-md z-50 flex justify-between items-center">
-        <div class="text-2xl font-black italic tracking-tighter text-cyan-400">DRIP STORE</div>
-        <div class="flex items-center space-x-4">
-            <select id="currency" onchange="updatePrices()" class="bg-gray-800 text-xs rounded-full px-3 py-2 border-none outline-none">
-                <option value="INR">INR (₹)</option>
-                <option value="USD">USD ($)</option>
+<body class="pb-20">
+
+    <nav class="sticky-nav sticky top-0 z-50 px-5 py-4 flex justify-between items-center border-b border-gray-100">
+        <div class="text-xl font-black tracking-widest uppercase">Power<span class="text-blue-600">Drip</span></div>
+        <div class="flex space-x-4 text-lg">
+            <select id="currency" onchange="updatePrices()" class="text-xs font-bold bg-transparent outline-none">
+                <option value="INR">INR</option>
+                <option value="USD">USD</option>
             </select>
-            <i class="fa-solid fa-cart-shopping text-xl"></i>
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-solid fa-bag-shopping"></i>
         </div>
     </nav>
 
-    <div class="bg-cyan-900/20 py-2 text-center text-[10px] font-bold tracking-widest uppercase text-cyan-400">
-        🚀 Free Worldwide Shipping on Orders above ₹2999
+    <div class="flex space-x-4 overflow-x-auto p-5 no-scrollbar">
+        <button class="px-6 py-2 bg-black text-white rounded-full text-xs font-bold whitespace-nowrap">NEW ARRIVALS</button>
+        <button class="px-6 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold whitespace-nowrap text-gray-500">RETRO KITS</button>
+        <button class="px-6 py-2 bg-white border border-gray-200 rounded-full text-xs font-bold whitespace-nowrap text-gray-500">TRAINING</button>
     </div>
 
-    <div class="max-w-6xl mx-auto p-6 grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8">
+    <div class="grid grid-cols-2 gap-[1px] bg-gray-100 border-t border-gray-100">
         
-        <div class="product-card rounded-2xl overflow-hidden">
+        <div class="bg-white p-2">
             <div class="relative">
-                <img src="https://i.ibb.co/XfR0mYp/jersey.jpg" class="w-full h-48 md:h-80 object-cover">
-                <span class="absolute top-2 left-2 badge text-[10px] px-2 py-1 rounded-md font-bold">BEST SELLER</span>
+                <img src="jersey1.jpg" class="w-full aspect-[3/4] object-cover" onerror="this.src='https://via.placeholder.com/300x400'">
+                <div class="absolute bottom-2 left-2 bg-white/90 px-2 py-1 text-[10px] font-black">4.8 ★</div>
             </div>
-            <div class="p-4">
-                <h3 class="font-bold text-sm md:text-lg mb-1">Black & Gold Dragon Kit</h3>
-                <p class="text-cyan-400 font-black text-xl mb-3 price" data-inr="1499">₹1,499</p>
-                <button onclick="buyNow('Dragon Kit', 1499)" class="w-full bg-white text-black text-xs font-black py-3 rounded-xl uppercase">Add to Cart</button>
+            <div class="py-3 px-1">
+                <h3 class="text-[11px] font-bold text-gray-800 uppercase truncate">Black Dragon Premium Kit</h3>
+                <div class="flex items-center space-x-2 mt-1">
+                    <span class="text-sm font-black price" data-inr="1499">₹1,499</span>
+                    <span class="text-[10px] text-gray-400 line-through">₹2,499</span>
+                </div>
+                <button onclick="buyNow('Dragon Kit', 1499)" class="w-full mt-3 power-btn py-2 text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
             </div>
         </div>
 
-        <div class="product-card rounded-2xl overflow-hidden">
+        <div class="bg-white p-2">
             <div class="relative">
-                <img src="https://via.placeholder.com/400x500/111/fff?text=Brazil+Retro" class="w-full h-48 md:h-80 object-cover">
+                <img src="jersey2.jpg" class="w-full aspect-[3/4] object-cover" onerror="this.src='https://via.placeholder.com/300x400'">
+                <div class="absolute bottom-2 left-2 bg-white/90 px-2 py-1 text-[10px] font-black">4.5 ★</div>
             </div>
-            <div class="p-4">
-                <h3 class="font-bold text-sm md:text-lg mb-1">Brazil 2002 Retro</h3>
-                <p class="text-cyan-400 font-black text-xl mb-3 price" data-inr="1299">₹1,299</p>
-                <button onclick="buyNow('Brazil 2002', 1299)" class="w-full bg-white text-black text-xs font-black py-3 rounded-xl uppercase">Add to Cart</button>
+            <div class="py-3 px-1">
+                <h3 class="text-[11px] font-bold text-gray-800 uppercase truncate">Madrid Pink Special Edition</h3>
+                <div class="flex items-center space-x-2 mt-1">
+                    <span class="text-sm font-black price" data-inr="1299">₹1,299</span>
+                    <span class="text-[10px] text-gray-400 line-through">₹1,999</span>
+                </div>
+                <button onclick="buyNow('Pink Madrid', 1299)" class="w-full mt-3 power-btn py-2 text-[10px] font-bold uppercase tracking-wider">Add to Bag</button>
             </div>
         </div>
 
-        <div class="product-card rounded-2xl overflow-hidden">
-            <div class="relative">
-                <img src="https://via.placeholder.com/400x500/111/fff?text=Madrid+Jersey" class="w-full h-48 md:h-80 object-cover">
-            </div>
-            <div class="p-4">
-                <h3 class="font-bold text-sm md:text-lg mb-1">Madrid Special Edition</h3>
-                <p class="text-cyan-400 font-black text-xl mb-3 price" data-inr="1599">₹1,599</p>
-                <button onclick="buyNow('Madrid Special', 1599)" class="w-full bg-white text-black text-xs font-black py-3 rounded-xl uppercase">Add to Cart</button>
-            </div>
         </div>
 
+    <div class="bottom-nav">
+        <div class="text-center text-[10px] font-bold text-blue-600"><p>HOME</p></div>
+        <div class="text-center text-[10px] font-bold text-gray-400"><p>CATEGORIES</p></div>
+        <div class="text-center text-[10px] font-bold text-gray-400"><p>ACCOUNT</p></div>
     </div>
-
-    <section class="p-10 border-t border-gray-900 mt-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div><i class="fa-solid fa-truck-fast text-cyan-400 mb-2"></i><p class="text-[10px] uppercase font-bold">Fast Delivery</p></div>
-        <div><i class="fa-solid fa-shield-halved text-cyan-400 mb-2"></i><p class="text-[10px] uppercase font-bold">Secure Payment</p></div>
-        <div><i class="fa-solid fa-rotate-left text-cyan-400 mb-2"></i><p class="text-[10px] uppercase font-bold">7 Days Return</p></div>
-        <div><i class="fa-solid fa-headset text-cyan-400 mb-2"></i><p class="text-[10px] uppercase font-bold">24/7 Support</p></div>
-    </section>
 
     <script>
         function updatePrices() {
@@ -82,29 +84,11 @@
                 el.innerText = curr === 'USD' ? '$' + (inr/83).toFixed(2) : '₹' + inr;
             });
         }
-
         function buyNow(name, price) {
-            const curr = document.getElementById('currency').value;
-            const finalPrice = curr === 'USD' ? '$' + (price/83).toFixed(2) : '₹' + price;
-            const msg = encodeURIComponent(`Bhai, ye order confirm karna hai:\nProduct: ${name}\nPrice: ${finalPrice}\nSize: M/L/XL?`);
+            const msg = encodeURIComponent(`PowerDrip Order:\nProduct: ${name}\nPrice: ₹${price}\nSize: M/L/XL?`);
             window.open(`https://wa.me/919641729126?text=${msg}`, '_blank');
         }
     </script>
 </body>
-</html>        </div>
-    </main>
-
-    <script>
-        const priceINR = 1499;
-        function updateCurrency() {
-            const curr = document.getElementById('currency').value;
-            const tag = document.getElementById('price-tag');
-            tag.innerText = curr === 'USD' ? '$' + (priceINR/83).toFixed(2) : '₹' + priceINR;
-        }
-        function orderNow() {
-            const msg = encodeURIComponent("Bhai, mujhe ye Black & Gold Dragon Kit chahiye. Price: " + document.getElementById('price-tag').innerText);
-            window.open(`https://wa.me/919641729126?text=${msg}`, '_blank');
-        }
-    </script>
-</body>
+</html></body>
 </html>
