@@ -2,111 +2,171 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POWERDRIP | Premium Streetwear</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>POWERDRIP | Official Store</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap');
-        body { font-family: 'Outfit', sans-serif; background-color: #fff; color: #000; overflow-x: hidden; }
-        .sidebar { transition: transform 0.4s cubic-bezier(0.77,0.2,0.05,1.0); z-index: 2000; }
-        .overlay { display: none; background: rgba(0,0,0,0.5); z-index: 1500; }
-        .overlay.active { display: block; }
-        .product-card img { transition: 0.3s; aspect-ratio: 2/3; object-fit: cover; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #fff; color: #000; overflow-x: hidden; }
+        .drawer { transition: transform 0.4s ease-in-out; position: fixed; top: 0; right: 0; width: 100%; h-full: 100%; bg-white; z-index: 2000; transform: translateX(100%); overflow-y: auto; }
+        .drawer.active { transform: translateX(0); }
+        #sidebar { transition: transform 0.3s ease-in-out; z-index: 3000; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        input, textarea { border: 1px solid #eee; padding: 12px; width: 100%; margin-bottom: 10px; font-size: 14px; border-radius: 4px; }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-20">
 
-    <div id="sidebar" class="sidebar fixed top-0 left-0 w-72 h-full bg-white -translate-x-full shadow-2xl">
+    <div id="sidebar" class="fixed top-0 left-0 w-80 h-full bg-white -translate-x-full shadow-2xl overflow-y-auto">
         <div class="p-6 border-b flex justify-between items-center">
-            <h2 class="text-xl font-black italic">POWERDRIP</h2>
+            <span class="text-xl font-black italic">POWERDRIP</span>
             <i class="fa-solid fa-xmark text-xl" onclick="toggleSidebar()"></i>
         </div>
-        <div class="p-6 space-y-6 font-bold text-sm tracking-wide">
-            <p class="text-gray-400 text-[10px] uppercase tracking-[0.2em]">Shop Categories</p>
-            <div class="space-y-4">
-                <div class="flex justify-between items-center"><span>New Drops</span><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
-                <div class="flex justify-between items-center"><span>Retro Football Kits</span><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
-                <div class="flex justify-between items-center"><span>Oversized Tees</span><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
-                <div class="flex justify-between items-center"><span>Training Gear</span><i class="fa-solid fa-chevron-right text-[10px]"></i></div>
-            </div>
-            <div class="pt-6 border-t space-y-4">
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-truck-fast"></i><span>Track Order</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-headset"></i><span>Customer Support</span></div>
-                <div class="flex items-center space-x-3"><i class="fa-solid fa-circle-info"></i><span>About Us</span></div>
-            </div>
+        <div class="p-6 space-y-6 font-bold text-sm uppercase">
+            <p onclick="openDrawer('account')">My Account</p>
+            <p onclick="openDrawer('wishlist')">Wishlist</p>
+            <p onclick="alert('Return Policy: 7 Days Easy Return. Contact Support.')">Return & Exchange</p>
+            <a href="mailto:jishumali29@gmail.com" class="block">Contact Support</a>
+            <a href="https://wa.me/919641729126" class="block text-green-600">WhatsApp Help</a>
         </div>
     </div>
-    <div id="overlay" class="overlay fixed inset-0" onclick="toggleSidebar()"></div>
 
-    <nav class="sticky top-0 bg-white border-b border-gray-100 px-5 py-4 flex justify-between items-center z-[1000]">
+    <nav class="sticky top-0 bg-white z-[1000] border-b border-gray-100 px-4 py-4 flex justify-between items-center">
         <div class="flex items-center space-x-4">
             <i class="fa-solid fa-bars-staggered text-xl" onclick="toggleSidebar()"></i>
-            <span class="text-2xl font-black tracking-tighter uppercase italic tracking-[-0.05em]">POWER<span class="text-blue-600">DRIP</span></span>
+            <h1 class="text-xl font-black italic uppercase italic">POWERDRIP</h1>
         </div>
-        <div class="flex items-center space-x-5">
-            <i class="fa-solid fa-magnifying-glass text-lg"></i>
-            <div class="relative" onclick="toggleCart()">
-                <i class="fa-solid fa-bag-shopping text-xl"></i>
-                <span id="cart-count" class="absolute -top-2 -right-2 bg-black text-white text-[8px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
+        <div class="flex items-center space-x-4">
+            <i class="fa-solid fa-heart text-xl" onclick="openDrawer('wishlist')"></i>
+            <div class="relative" onclick="openDrawer('cart')">
+                <i class="fa-solid fa-bag-shopping text-2xl"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-black text-white text-[9px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
             </div>
         </div>
     </nav>
 
-    <div class="bg-gray-100 py-2 text-center text-[9px] font-bold uppercase tracking-widest border-b">
-        ⚡ Limited stock: 2026 Season Kits are now Live
-    </div>
-
-    <div class="flex space-x-6 overflow-x-auto px-5 py-4 no-scrollbar bg-white text-[11px] font-black uppercase tracking-widest text-gray-400">
-        <span class="text-black border-b-2 border-black pb-1">All</span>
-        <span>Retro</span>
-        <span>Training</span>
-        <span>Custom</span>
-    </div>
-
     <div class="grid grid-cols-2 gap-[1px] bg-gray-100 border-b">
-        <div class="bg-white p-4" onclick="addToCart('Black Dragon Kit', 1499, 'jersey1.jpg')">
-            <div class="relative">
-                <img src="jersey1.jpg" class="w-full" onerror="this.src='https://via.placeholder.com/300x450/f3f3f3/000?text=PowerDrip'">
-                <div class="absolute top-2 right-2 bg-white px-2 py-1 text-[8px] font-bold shadow-sm">NEW</div>
+        <div class="bg-white p-4 relative">
+            <i class="fa-regular fa-heart absolute top-6 right-6 text-lg" onclick="addToWishlist('Black Dragon', 1499, 'jersey1.jpg')"></i>
+            <img src="jersey1.jpg" onclick="addToCart('Black Dragon', 1499, 'jersey1.jpg')">
+            <p class="text-[10px] font-bold mt-3 uppercase">Black Dragon Kit</p>
+            <p class="text-sm font-black">₹1,499</p>
+        </div>
+        <div class="bg-white p-4 relative">
+            <i class="fa-regular fa-heart absolute top-6 right-6 text-lg" onclick="addToWishlist('Madrid Pink', 1299, 'jersey2.jpg')"></i>
+            <img src="jersey2.jpg" onclick="addToCart('Madrid Pink', 1299, 'jersey2.jpg')">
+            <p class="text-[10px] font-bold mt-3 uppercase">Madrid Pink Special</p>
+            <p class="text-sm font-black">₹1,299</p>
+        </div>
+    </div>
+
+    <div id="main-drawer" class="drawer h-full">
+        <div class="p-5 border-b flex items-center sticky top-0 bg-white">
+            <i class="fa-solid fa-arrow-left text-xl mr-4" onclick="closeDrawer()"></i>
+            <h2 id="drawer-title" class="text-lg font-black uppercase">Title</h2>
+        </div>
+        
+        <div id="account-tab" class="tab-content p-6">
+            <div id="login-form">
+                <h3 class="font-bold mb-4 uppercase text-xs">Login / Create Account</h3>
+                <input type="text" id="user-name" placeholder="Username">
+                <input type="email" id="user-email" placeholder="Email">
+                <button onclick="saveAccount()" class="w-full bg-black text-white py-4 font-bold uppercase text-xs">Save Account</button>
             </div>
-            <div class="mt-4">
-                <p class="text-[10px] font-bold uppercase text-gray-800">Black & Gold Dragon</p>
-                <div class="flex items-center space-x-2 mt-1">
-                    <p class="text-sm font-black">₹1,499</p>
-                    <p class="text-[10px] text-gray-400 line-through">₹2,999</p>
-                </div>
+            <div id="user-profile" class="hidden">
+                <p class="text-xl font-black italic mb-2" id="display-name"></p>
+                <p class="text-gray-500 text-sm mb-6" id="display-email"></p>
+                <button onclick="logout()" class="text-red-500 font-bold text-xs uppercase">Logout</button>
             </div>
         </div>
 
-        <div class="bg-white p-4" onclick="addToCart('Madrid Pink Edition', 1299, 'jersey2.jpg')">
-            <div class="relative text-center">
-                <img src="jersey2.jpg" class="w-full" onerror="this.src='https://via.placeholder.com/300x450/f3f3f3/000?text=PowerDrip'">
+        <div id="wishlist-tab" class="tab-content p-6">
+            <div id="wishlist-list" class="space-y-4"></div>
+        </div>
+
+        <div id="cart-tab" class="tab-content p-6">
+            <div id="cart-list" class="space-y-4 mb-6"></div>
+            <div id="checkout-form" class="hidden">
+                <input type="text" id="ship-name" placeholder="Full Name">
+                <textarea id="ship-addr" placeholder="Address"></textarea>
+                <button onclick="pay()" class="w-full bg-blue-600 text-white py-4 font-bold">PAY NOW</button>
             </div>
-            <div class="mt-4">
-                <p class="text-[10px] font-bold uppercase text-gray-800">Madrid Pink Edition</p>
-                <div class="flex items-center space-x-2 mt-1">
-                    <p class="text-sm font-black">₹1,299</p>
-                    <p class="text-[10px] text-gray-400 line-through">₹1,899</p>
-                </div>
+            <div id="cart-footer">
+                <div class="flex justify-between font-black mb-4"><span>Total</span><span id="cart-total">₹0</span></div>
+                <button onclick="showCheckout()" class="w-full bg-black text-white py-4 font-bold">PROCEED</button>
             </div>
         </div>
     </div>
 
-    <div class="p-8 grid grid-cols-2 gap-6 bg-white border-t">
-        <div class="text-center"><i class="fa-solid fa-shield-check text-2xl mb-2"></i><p class="text-[9px] font-bold uppercase">Secure UPI Payment</p></div>
-        <div class="text-center"><i class="fa-solid fa-truck-fast text-2xl mb-2"></i><p class="text-[9px] font-bold uppercase">Fast Global Shipping</p></div>
-    </div>
+    <script>
+        let cart = [], wishlist = [];
+        const upi = "jishumali@ibl";
 
-    <div id="cart-drawer" class="fixed top-0 right-0 w-full h-full bg-white z-[3000] translate-x-full overflow-y-auto transition-transform">
-        <div class="p-6 border-b flex justify-between items-center bg-white sticky top-0">
-            <h2 class="text-xl font-black uppercase">My Shopping Bag</h2>
-            <i class="fa-solid fa-xmark text-2xl" onclick="toggleCart()"></i>
-        </div>
-        <div id="cart-items" class="p-6 space-y-6 h-[60vh]"></div>
-        <div class="p-6 border-t">
-            <div class="flex justify-between text-xl font-black mb-6 uppercase"><span>Total</span><span id="cart-total">₹0</span></div>
+        function toggleSidebar() { document.getElementById('sidebar').classList.toggle('-translate-x-full'); }
+        function openDrawer(tab) {
+            document.getElementById('main-drawer').classList.add('active');
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tab + '-tab').classList.add('active');
+            document.getElementById('drawer-title').innerText = tab;
+            if(tab === 'account') checkAccount();
+        }
+        function closeDrawer() { document.getElementById('main-drawer').classList.remove('active'); }
+
+        // Account Logic
+        function saveAccount() {
+            const n = document.getElementById('user-name').value;
+            const e = document.getElementById('user-email').value;
+            localStorage.setItem('user', JSON.stringify({n, e}));
+            checkAccount();
+        }
+        function checkAccount() {
+            const u = JSON.parse(localStorage.getItem('user'));
+            if(u) {
+                document.getElementById('login-form').classList.add('hidden');
+                document.getElementById('user-profile').classList.remove('hidden');
+                document.getElementById('display-name').innerText = "Hello, " + u.n;
+                document.getElementById('display-email').innerText = u.e;
+            }
+        }
+        function logout() { localStorage.removeItem('user'); location.reload(); }
+
+        // Wishlist Logic
+        function addToWishlist(n, p, img) {
+            wishlist.push({n, p, img});
+            renderWishlist();
+            alert("Added to Wishlist!");
+        }
+        function renderWishlist() {
+            const list = document.getElementById('wishlist-list');
+            list.innerHTML = wishlist.map(i => `<div class="flex items-center space-x-4 border-b pb-2"><img src="${i.img}" class="w-12"><p class="text-xs font-bold">${i.n}</p></div>`).join('');
+        }
+
+        // Cart & Payment
+        function addToCart(n, p, img) {
+            cart.push({n, p, img});
+            updateCart();
+            openDrawer('cart');
+        }
+        function updateCart() {
+            const l = document.getElementById('cart-list');
+            let t = 0;
+            l.innerHTML = cart.map(i => { t+=i.p; return `<div class="flex justify-between text-xs font-bold border-b pb-2"><span>${i.n}</span><span>₹${i.p}</span></div>`}).join('');
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('cart-total').innerText = '₹' + t;
+        }
+        function showCheckout() {
+            document.getElementById('checkout-form').classList.remove('hidden');
+            document.getElementById('cart-footer').classList.add('hidden');
+        }
+        function pay() {
+            let t = cart.reduce((s, i) => s + i.p, 0);
+            window.location.href = `upi://pay?pa=${upi}&pn=PowerDrip&am=${t}&cu=INR`;
+        }
+    </script>
+</body>
+</html>            <div class="flex justify-between text-xl font-black mb-6 uppercase"><span>Total</span><span id="cart-total">₹0</span></div>
             <button onclick="openCheckout()" class="w-full bg-black text-white py-5 font-black uppercase text-xs tracking-[0.2em]">Continue to Shipping</button>
         </div>
     </div>
